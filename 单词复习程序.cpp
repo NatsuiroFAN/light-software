@@ -4,90 +4,90 @@
 #include<string.h>
 #include<time.h>
 
-struct information_node * wordIn(int *cnt);//ÎÄ¼şÄÚĞÅÏ¢µ¼ÈëÁ´±íº¯Êı
-struct information_node * newWordInsert(struct information_node *head,int *cnt_word);//ĞÂµ¥´Ê²åÈë¹¦ÄÜº¯Êı
-void reciteWord(int choosingNumber2,int cnt_word,struct information_node *head);//µ¥´Ê¸´Ï°¹¦ÄÜº¯Êı
-void choosingSort(int cnt_word,int choosingNumber3,struct information_node *sorting_word);//Ñ¡ÔñÅÅĞò²¢Êä³öĞòÁĞ±íº¯Êı
-void dataCount(int cnt_word,struct information_node * head);//¼¼ÊõÊı¾İ±íÊä³öº¯Êı 
-void word_output(int cnt_word,struct information_node *head );//Á´±íÒÑ±ä¸üĞÅÏ¢Ğ´ÈëÎÄ¼şº¯Êı
+struct information_node * wordIn(int *cnt);//æ–‡ä»¶å†…ä¿¡æ¯å¯¼å…¥é“¾è¡¨å‡½æ•°
+struct information_node * newWordInsert(struct information_node *head,int *cnt_word);//æ–°å•è¯æ’å…¥åŠŸèƒ½å‡½æ•°
+void reciteWord(int choosingNumber2,int cnt_word,struct information_node *head);//å•è¯å¤ä¹ åŠŸèƒ½å‡½æ•°
+void choosingSort(int cnt_word,int choosingNumber3,struct information_node *sorting_word);//é€‰æ‹©æ’åºå¹¶è¾“å‡ºåºåˆ—è¡¨å‡½æ•°
+void dataCount(int cnt_word,struct information_node * head);//æŠ€æœ¯æ•°æ®è¡¨è¾“å‡ºå‡½æ•° 
+void word_output(int cnt_word,struct information_node *head );//é“¾è¡¨å·²å˜æ›´ä¿¡æ¯å†™å…¥æ–‡ä»¶å‡½æ•°
 
-//Ã¿¸öµ¥´ÊµÄĞÅÏ¢ Ê¹ÓÃÁ´±í´¢´æ 
+//æ¯ä¸ªå•è¯çš„ä¿¡æ¯ ä½¿ç”¨é“¾è¡¨å‚¨å­˜ 
 struct information_node{
-	char wordName[20];//µ¥´Ê 
-	char wordMean[40];//µ¥´ÊÊÍÒå 
-	int cnt_correct;//ÕıÈ·´ÎÊı 
-	int cnt_wrong;//´íÎó´ÎÊı
-	int cnt_answer;//»Ø´ğ´ÎÊı 
-	struct information_node *next;//nextÖ¸Õë 
+	char wordName[20];//å•è¯ 
+	char wordMean[40];//å•è¯é‡Šä¹‰ 
+	int cnt_correct;//æ­£ç¡®æ¬¡æ•° 
+	int cnt_wrong;//é”™è¯¯æ¬¡æ•°
+	int cnt_answer;//å›ç­”æ¬¡æ•° 
+	struct information_node *next;//nextæŒ‡é’ˆ 
 }; 
 
 int main()
 {	
 	int cnt_word=0;
-	//¶¨Òå²¢´¢´æÎÄ¼şÁ´±í 
+	//å®šä¹‰å¹¶å‚¨å­˜æ–‡ä»¶é“¾è¡¨ 
 	struct information_node *tail=NULL;
 	struct information_node *head=wordIn(&cnt_word);
 	
-	int choosingNumber1;//³ÌĞòÍâÎ§Ñ¡Ôñ±äÁ¿ 
-	int choosingNumber2;//µ¥´Ê±³ËĞ¹¦ÄÜÑ¡Ôñ 
-	int cnt_newWord;//Â¼ÈëĞÂµ¥´Ê¹¦ÄÜÖĞĞÂµ¥´ÊÊıÁ¿Í³¼Æ±äÁ¿ 
+	int choosingNumber1;//ç¨‹åºå¤–å›´é€‰æ‹©å˜é‡ 
+	int choosingNumber2;//å•è¯èƒŒè¯µåŠŸèƒ½é€‰æ‹© 
+	int cnt_newWord;//å½•å…¥æ–°å•è¯åŠŸèƒ½ä¸­æ–°å•è¯æ•°é‡ç»Ÿè®¡å˜é‡ 
 	
-	//»¶Ó­ÎÊºòÓïĞĞ 
-	printf("**********************************\n	µÎË®Ê¯´©\n**********************************\n\n"); 
-	//Ä¿±ê¹¦ÄÜ²Ëµ¥ĞòÁĞ±í
+	//æ¬¢è¿é—®å€™è¯­è¡Œ 
+	printf("**********************************\n	æ»´æ°´çŸ³ç©¿\n**********************************\n\n"); 
+	//ç›®æ ‡åŠŸèƒ½èœå•åºåˆ—è¡¨
 	while(1){
-		printf("0 ĞÂµÄµ¥´ÊÂ¼Èë\n");
-		printf("1 ¿ªÊ¼¸´Ï°µ¥´Ê\n");
-		printf("2 ¼¼ÊõÊı¾İÍ³¼Æ\n"); 
-		printf("3 ÍË³ö³ÌĞò\n"); 
-		printf("ÇëÊäÈëÄ¿±ê¹¦ÄÜĞòºÅ£º");
-		//Â¼Èë¹¦ÄÜÑ¡ÔñĞòºÅ 
+		printf("0 æ–°çš„å•è¯å½•å…¥\n");
+		printf("1 å¼€å§‹å¤ä¹ å•è¯\n");
+		printf("2 æŠ€æœ¯æ•°æ®ç»Ÿè®¡\n"); 
+		printf("3 é€€å‡ºç¨‹åº\n"); 
+		printf("è¯·è¾“å…¥ç›®æ ‡åŠŸèƒ½åºå·ï¼š");
+		//å½•å…¥åŠŸèƒ½é€‰æ‹©åºå· 
 		scanf("%d",&choosingNumber1);
 		printf("\n");
-		//Ä¿±ê¹¦ÄÜÑ¡Ôñ 
+		//ç›®æ ‡åŠŸèƒ½é€‰æ‹© 
 		switch(choosingNumber1){
 			case 0:
-				printf("¹¦ÄÜ£ºĞÂµÄµ¥´ÊÂ¼Èë\n");
+				printf("åŠŸèƒ½ï¼šæ–°çš„å•è¯å½•å…¥\n");
 				cnt_newWord=0;
 				head=newWordInsert(head,&cnt_newWord);
-				printf("ĞÂµÄµ¥´ÊÂ¼Èë³É¹¦  ±¾´ÎÂ¼ÈëĞÂµ¥´ÊÊıÁ¿£º%d¸ö\n\n",cnt_newWord);
-				cnt_word+=cnt_newWord;//µ¥´Ê×ÜÊı¼ÓÉÏĞÂÌí¼Óµ¥´ÊÊı 
+				printf("æ–°çš„å•è¯å½•å…¥æˆåŠŸ  æœ¬æ¬¡å½•å…¥æ–°å•è¯æ•°é‡ï¼š%dä¸ª\n\n",cnt_newWord);
+				cnt_word+=cnt_newWord;//å•è¯æ€»æ•°åŠ ä¸Šæ–°æ·»åŠ å•è¯æ•° 
 				break;
 			case 1:
-				printf("¹¦ÄÜ£º¸´Ï°ÀúÊ·´æÈëµ¥´Ê\n");
-				printf("ÇëÑ¡Ôñ¸´Ï°·½Ê½ \n0)ÒÔºº´ğÓ¢\n1)ÒÔÓ¢´ğºº £º");
+				printf("åŠŸèƒ½ï¼šå¤ä¹ å†å²å­˜å…¥å•è¯\n");
+				printf("è¯·é€‰æ‹©å¤ä¹ æ–¹å¼ \n0)ä»¥æ±‰ç­”è‹±\n1)ä»¥è‹±ç­”æ±‰ ï¼š");
 				scanf("%d",&choosingNumber2); 
 				printf("\n");
 				reciteWord(choosingNumber2,cnt_word,head);
 				break;
 			case 2:
-				printf("¹¦ÄÜ£º¼¼ÊõÊı¾İÍ³¼ÆÈçÏÂ\n");
+				printf("åŠŸèƒ½ï¼šæŠ€æœ¯æ•°æ®ç»Ÿè®¡å¦‚ä¸‹\n");
 				dataCount(cnt_word,head);
 				break;
 			case 3:
-				printf("¹¦ÄÜ£ºÍË³ö³ÌĞò\n");
+				printf("åŠŸèƒ½ï¼šé€€å‡ºç¨‹åº\n");
 				word_output(cnt_word,head);
 				exit(0); 
 		}
 	}
 } 
 
-/*ÎÄ¼şÄÚĞÅÏ¢µ¼ÈëÁ´±íº¯Êı
-²ÎÊı£ºµ¥´Ê×ÜÊı±äÁ¿µØÖ· ·µ»ØÖµ£ºÁ´±íµÄÍ·½áµãµØÖ·*/
+/*æ–‡ä»¶å†…ä¿¡æ¯å¯¼å…¥é“¾è¡¨å‡½æ•°
+å‚æ•°ï¼šå•è¯æ€»æ•°å˜é‡åœ°å€ è¿”å›å€¼ï¼šé“¾è¡¨çš„å¤´ç»“ç‚¹åœ°å€*/
 struct information_node * wordIn(int *cnt){
 	FILE *fp;
 	*cnt=0;
 	
-	if((fp=fopen("µ¥´Ê¿â.txt","r"))==NULL){
-		printf("µ¥´Ê´¢´æÎÄ¼ş²»´æÔÚ ¼´½«ĞÂ½¨ÎÄ¼ş£¡\n");
-		return NULL;//ÈçÎÄ¼ş²»´æÔÚ ÔòĞÂ½¨ÎÄ¼ş 
+	if((fp=fopen("å•è¯åº“.txt","r"))==NULL){
+		printf("å•è¯å‚¨å­˜æ–‡ä»¶ä¸å­˜åœ¨ å³å°†æ–°å»ºæ–‡ä»¶ï¼\n");
+		return NULL;//å¦‚æ–‡ä»¶ä¸å­˜åœ¨ åˆ™æ–°å»ºæ–‡ä»¶ 
 	}
 	
 	struct information_node *head,*tail,*word;
 	int size = sizeof(struct information_node);
 	
 	head=tail=NULL;
-	//Â¼ÈëÎÄ¼şÄÚĞÅÏ¢ 
+	//å½•å…¥æ–‡ä»¶å†…ä¿¡æ¯ 
 	while(!feof(fp)){
 		word=(struct information_node *)malloc(size);
 		fscanf(fp,"%s%s%d%d%d",word->wordName,word->wordMean,&word->cnt_correct,&word->cnt_wrong,&word->cnt_answer);
@@ -102,237 +102,237 @@ struct information_node * wordIn(int *cnt){
 	}
 	(*cnt)--; 
 	if(fclose(fp)){
-		printf("¹Ø±ÕÎÄ¼şÊ§°Ü£¡");
+		printf("å…³é—­æ–‡ä»¶å¤±è´¥ï¼");
 		exit(0);
 	}
-	//·µ»ØÁ´±íÍ·µØÖ· 
+	//è¿”å›é“¾è¡¨å¤´åœ°å€ 
 	return head;
 }
 
-/*ĞÂµ¥´Ê²åÈë¹¦ÄÜº¯Êı
-²ÎÊı£ºÁ´±íÍ·½áµã¡¡·µ»ØÖµ£ºĞÂ²åÈëµÄµ¥´Ê¸öÊı*/ 
+/*æ–°å•è¯æ’å…¥åŠŸèƒ½å‡½æ•°
+å‚æ•°ï¼šé“¾è¡¨å¤´ç»“ç‚¹ã€€è¿”å›å€¼ï¼šæ–°æ’å…¥çš„å•è¯ä¸ªæ•°*/ 
 struct information_node * newWordInsert(struct information_node *head,int *cnt_newWord){
-	FILE *fp;//¶¨ÒåÎÄ¼şÖ¸Õë
-	//ĞÂ½¨ÒÆ¶¯¡¢Î²¡¢ĞÂµ¥´ÊÁ´±í½Úµã 
+	FILE *fp;//å®šä¹‰æ–‡ä»¶æŒ‡é’ˆ
+	//æ–°å»ºç§»åŠ¨ã€å°¾ã€æ–°å•è¯é“¾è¡¨èŠ‚ç‚¹ 
 	struct information_node *p=head,*tail=NULL,*newWord=NULL;
-	int size=sizeof(information_node);//¶¯Ì¬ÉêÇë¿Õ¼ä×¼±¸ 
-	int first=1;//ÊÍÒåÌáÊ¾Óï ½ö³öÏÖÒ»´Î¿ØÖÆ±äÁ¿ 
+	int size=sizeof(struct information_node);//åŠ¨æ€ç”³è¯·ç©ºé—´å‡†å¤‡ 
+	int first=1;//é‡Šä¹‰æç¤ºè¯­ ä»…å‡ºç°ä¸€æ¬¡æ§åˆ¶å˜é‡ 
 	
-	//½«Î²½áµãÕıÎ» 
+	//å°†å°¾ç»“ç‚¹æ­£ä½ 
 	if(head==NULL){
-		//ÎŞÔ¤ÖÃÎÄ¼ş Èç¹ûÊ×½Úµã²»´æÔÚ 
+		//æ— é¢„ç½®æ–‡ä»¶ å¦‚æœé¦–èŠ‚ç‚¹ä¸å­˜åœ¨ 
 		tail=NULL;
 	} else{
-		//ÓĞÔ¤ÖÃÎÄ¼ş Ê×½Úµã´æÔÚ 
+		//æœ‰é¢„ç½®æ–‡ä»¶ é¦–èŠ‚ç‚¹å­˜åœ¨ 
 		while(p->next!=NULL){
 			tail=p;
 			p=p->next;
 		}
 	}
 	
-	//Â¼ÈëĞÂµ¥´Ê  
-	if((fp=fopen("µ¥´Ê¿â.txt","a"))==NULL){
-		printf("µ¥´Ê¿âÄÚĞÅÏ¢µ¼ÈëÊ§°Ü£¡");
+	//å½•å…¥æ–°å•è¯  
+	if((fp=fopen("å•è¯åº“.txt","a"))==NULL){
+		printf("å•è¯åº“å†…ä¿¡æ¯å¯¼å…¥å¤±è´¥ï¼");
 		exit(0); 
 	} 
-	printf("ÇëÂ¼ÈëĞÂµÄµ¥´Ê Ã¿¸öµ¥´ÊÒÔ»Ø³µ½áÎ²\n×îºóÒ»¸öµ¥´ÊÂ¼Èë½áÊøÊ±ÇëÊäÈëµ¥´ÊÃûcommend_endÒÔ½áÊøĞÂµ¥´ÊÂ¼Èë£¡\n\n"); 
+	printf("è¯·å½•å…¥æ–°çš„å•è¯ æ¯ä¸ªå•è¯ä»¥å›è½¦ç»“å°¾\næœ€åä¸€ä¸ªå•è¯å½•å…¥ç»“æŸæ—¶è¯·è¾“å…¥å•è¯åcommend_endä»¥ç»“æŸæ–°å•è¯å½•å…¥ï¼\n\n"); 
 	while(1) {
-		//ĞÂµ¥´Ê²åÈë¼°ĞÂµ¥´ÊĞÅÏ¢»ñÈ¡ 
-		//¶¯Ì¬ÉêÇëÃ¿¸öĞÂ½ÚµãµÄ¿Õ¼ä 
+		//æ–°å•è¯æ’å…¥åŠæ–°å•è¯ä¿¡æ¯è·å– 
+		//åŠ¨æ€ç”³è¯·æ¯ä¸ªæ–°èŠ‚ç‚¹çš„ç©ºé—´ 
 		newWord=(struct information_node*)malloc(size); 
-		//Â¼ÈëĞÂµÄµ¥´Ê 
-		printf("ÇëÊäÈëĞÂµ¥´Ê£º");
+		//å½•å…¥æ–°çš„å•è¯ 
+		printf("è¯·è¾“å…¥æ–°å•è¯ï¼š");
 		scanf("%s",newWord->wordName);
 //		gets(newWord->wordName); 
-		//ÊäÈëµ¥´ÊÃûÎªcommend_end ÖÕÖ¹ 
+		//è¾“å…¥å•è¯åä¸ºcommend_end ç»ˆæ­¢ 
 		if(strcmp(newWord->wordName,"commend_end")==0) {
 			break;
 		}
-		//ĞÂµ¥´ÊÊÍÒåÊäÈëÌáÊ¾½ö³öÏÖÒ»´Î 
+		//æ–°å•è¯é‡Šä¹‰è¾“å…¥æç¤ºä»…å‡ºç°ä¸€æ¬¡ 
 		if(first==1){
-			printf("¶àÊÍÒåÒÔ·ÖºÅ¸ôÀë ÖĞ¼ä²»¿É´øÓĞ¡® ¡¯ ²»¿É³¬¹ı40×Ö·û\n");
+			printf("å¤šé‡Šä¹‰ä»¥åˆ†å·éš”ç¦» ä¸­é—´ä¸å¯å¸¦æœ‰â€˜ â€™ ä¸å¯è¶…è¿‡40å­—ç¬¦\n");
 			first=0;
 		} 
-		printf("ÇëÊäÈëĞÂµ¥´ÊÊÍÒå£º");
+		printf("è¯·è¾“å…¥æ–°å•è¯é‡Šä¹‰ï¼š");
 		scanf("%s",newWord->wordMean);
 //		gets(newWord->wordMean); 
-		//ĞÂµ¥´ÊÍ³¼ÆĞÅÏ¢³õÊ¼»¯
+		//æ–°å•è¯ç»Ÿè®¡ä¿¡æ¯åˆå§‹åŒ–
 		newWord->cnt_correct=0;newWord->cnt_wrong=0;newWord->cnt_answer=0; 
-		//ĞÂµÄµ¥´Ê¼ÓÈëÁ´±í 
+		//æ–°çš„å•è¯åŠ å…¥é“¾è¡¨ 
 		newWord->next=NULL;
 		if(head==NULL){
-			head=newWord;//ĞÂ½áµãÎªÁ´±íµÄÊ×½Úµã 
+			head=newWord;//æ–°ç»“ç‚¹ä¸ºé“¾è¡¨çš„é¦–èŠ‚ç‚¹ 
 		}else{
-			tail->next=newWord;//ĞÂ½áµã²åÈë·Ç¿ÕÁ´±íÎ²²¿ 
+			tail->next=newWord;//æ–°ç»“ç‚¹æ’å…¥éç©ºé“¾è¡¨å°¾éƒ¨ 
 		}
-		//Á´±íÎ²½ÚµãÎªĞÂ½Úµã 
+		//é“¾è¡¨å°¾èŠ‚ç‚¹ä¸ºæ–°èŠ‚ç‚¹ 
 		tail=newWord;
-		printf("ĞÂµ¥´Ê£º%s µ¼Èë³É¹¦\n\n",newWord->wordName); 
-		//ĞÂµ¥´ÊÊı++ 
+		printf("æ–°å•è¯ï¼š%s å¯¼å…¥æˆåŠŸ\n\n",newWord->wordName); 
+		//æ–°å•è¯æ•°++ 
 		(*cnt_newWord)++;
-		//½«ĞÂµÄµ¥´ÊĞÅÏ¢Ğ´ÈëÎÄ¼şÖĞ
+		//å°†æ–°çš„å•è¯ä¿¡æ¯å†™å…¥æ–‡ä»¶ä¸­
 		fprintf(fp,"%s %s %d %d %d\n",newWord->wordName,newWord->wordMean,newWord->cnt_correct,newWord->cnt_wrong,newWord->cnt_answer); 
 	}
-	//¹Ø±ÕÎÄ¼ş
+	//å…³é—­æ–‡ä»¶
 	if(fclose(fp)){
-		printf("Î´ÄÜÕı³£¹Ø±ÕÎÄ¼ş£¡");
+		printf("æœªèƒ½æ­£å¸¸å…³é—­æ–‡ä»¶ï¼");
 		exit(0); 
 	} 
 	return head;
 } 
 
-/*µ¥´Ê¸´Ï°¹¦ÄÜº¯Êı
-²ÎÊı£º¸´Ï°ÀàĞÍÑ¡Ôñ±äÁ¿choosingNumber2,Á´±íÍ·²¿½ÚµãµØÖ· ·µ»ØÖµ£ºÎŞ*/
+/*å•è¯å¤ä¹ åŠŸèƒ½å‡½æ•°
+å‚æ•°ï¼šå¤ä¹ ç±»å‹é€‰æ‹©å˜é‡choosingNumber2,é“¾è¡¨å¤´éƒ¨èŠ‚ç‚¹åœ°å€ è¿”å›å€¼ï¼šæ— */
 void reciteWord(int choosingNumber2,int cnt_word,struct information_node *head){
-	//Êı¾İÍ³¼Æ±äÁ¿ ,Ñ­»·¿ØÖÆ±äÁ¿ 
+	//æ•°æ®ç»Ÿè®¡å˜é‡ ,å¾ªç¯æ§åˆ¶å˜é‡ 
 	int cnt_c=0,cnt_w=0,cnt_a=0,i; 
-	//³£Á¿´¢´æ
+	//å¸¸é‡å‚¨å­˜
 //	const int CNT=cnt_word; 
-	//ÒÔºº´ğÓ¢±³ËĞ·½Ê½ 
+	//ä»¥æ±‰ç­”è‹±èƒŒè¯µæ–¹å¼ 
 	if(choosingNumber2==0){
-		//ÒÔÊ±¼ä×÷ÎªÖÖ×Ó 
+		//ä»¥æ—¶é—´ä½œä¸ºç§å­ 
 		srand((int)time(0));
-		printf("ÒÔºº´ğÓ¢¸´Ï°´Ê»ã·½Ê½ ÊäÈëcommend_endÒÔ½áÊø¸´Ï°\n\n");
+		printf("ä»¥æ±‰ç­”è‹±å¤ä¹ è¯æ±‡æ–¹å¼ è¾“å…¥commend_endä»¥ç»“æŸå¤ä¹ \n\n");
 		while(1){
-			//È¡Á´±í 0~½áµã×ÜÊı-1 ·¶Î§ÄÚÈÎÒâËæ»úÊı 
+			//å–é“¾è¡¨ 0~ç»“ç‚¹æ€»æ•°-1 èŒƒå›´å†…ä»»æ„éšæœºæ•° 
 			int random=rand()%cnt_word;
-//			int random=rand()%4;//µ÷ÊÔ 
+//			int random=rand()%4;//è°ƒè¯• 
 //			random=random==0?random:random-1;
 			
-			//È¡Ëæ»ú½áµãµØÖ·²¢´¢´æ 
+			//å–éšæœºç»“ç‚¹åœ°å€å¹¶å‚¨å­˜ 
 //			struct information_node *answer_word=head+random;
 			struct information_node *answer_word=head;
 			for(i=0;i<random;i++){
 				answer_word=answer_word->next;
 			}
-			//¶¨Òå»Ø´ğµÄµ¥´Ê
+			//å®šä¹‰å›ç­”çš„å•è¯
 			char answer[20];
 			
-			printf("ÊÍÒå£º%s\n",answer_word->wordMean);
+			printf("é‡Šä¹‰ï¼š%s\n",answer_word->wordMean);
 			scanf("%s",answer);
 			if(strcmp(answer,answer_word->wordName)==0){
-				printf("ÕıÈ·£¡\n\n");
+				printf("æ­£ç¡®ï¼\n\n");
 				cnt_c++;cnt_a++;
-				//ÕıÈ·´ÎÊıÓë»Ø´ğ´ÎÊı+1 
+				//æ­£ç¡®æ¬¡æ•°ä¸å›ç­”æ¬¡æ•°+1 
 				answer_word->cnt_answer++;answer_word->cnt_correct++; 
 			}else if(strcmp(answer,"commend_end")==0){
 				break;
 			}else{
-				printf("´íÎó£¡ ÕıÈ·´ğ°¸Îª£º%s\n\n",answer_word->wordName);
+				printf("é”™è¯¯ï¼ æ­£ç¡®ç­”æ¡ˆä¸ºï¼š%s\n\n",answer_word->wordName);
 				cnt_w++;cnt_a++;
-				//´íÎó´ÎÊıÓë»Ø´ğ´ÎÊı+1 
+				//é”™è¯¯æ¬¡æ•°ä¸å›ç­”æ¬¡æ•°+1 
 				answer_word->cnt_answer++;answer_word->cnt_wrong++;  
 			}
 		}
-		printf("¹¦ÄÜ½áÊø ±¾´Î¸´Ï° %d ´Ê»ã ÕıÈ·£º%d ´íÎó£º%d ÕıÈ·ÂÊ£º%.1f%%\n\n",cnt_a,cnt_c,cnt_w,100.0*cnt_c/cnt_a); 	
+		printf("åŠŸèƒ½ç»“æŸ æœ¬æ¬¡å¤ä¹  %d è¯æ±‡ æ­£ç¡®ï¼š%d é”™è¯¯ï¼š%d æ­£ç¡®ç‡ï¼š%.1f%%\n\n",cnt_a,cnt_c,cnt_w,100.0*cnt_c/cnt_a); 	
 	}else if (choosingNumber2==1){
-		//ÒÔÊ±¼ä×÷ÎªÖÖ×Ó 
+		//ä»¥æ—¶é—´ä½œä¸ºç§å­ 
 		srand((int)time(0));
-		printf("ÒÔÓ¢´ğºº¸´Ï°´Ê»ã·½Ê½ ÊäÈëcommend_endÒÔ½áÊø±³ËĞ\n\n");
+		printf("ä»¥è‹±ç­”æ±‰å¤ä¹ è¯æ±‡æ–¹å¼ è¾“å…¥commend_endä»¥ç»“æŸèƒŒè¯µ\n\n");
 		while(1){
-			//È¡Á´±í 0~½áµã×ÜÊı-1 ·¶Î§ÄÚÈÎÒâËæ»úÊı 
+			//å–é“¾è¡¨ 0~ç»“ç‚¹æ€»æ•°-1 èŒƒå›´å†…ä»»æ„éšæœºæ•° 
 			int random=rand()%cnt_word;
 //			random=random==0?random:random-1;
 			
-			//È¡Ëæ»ú½áµãµØÖ·²¢´¢´æ 
+			//å–éšæœºç»“ç‚¹åœ°å€å¹¶å‚¨å­˜ 
 //			struct information_node *answer_word=head+random;
 			struct information_node *answer_word=head;
 			for(i=0;i<random;i++){
 				answer_word=answer_word->next;
 			}
-			//¶¨Òå»Ø´ğµÄÊÍÒå 
+			//å®šä¹‰å›ç­”çš„é‡Šä¹‰ 
 			char answer[40];
 			
-			printf("µ¥´Ê£º%s\n",answer_word->wordName);
+			printf("å•è¯ï¼š%s\n",answer_word->wordName);
 			scanf("%s",answer);cnt_a++;
 			if(strcmp(answer,"commend_end")==0)break; 
-			printf("ÊÍÒå£º %s\n\n",answer_word->wordMean);
+			printf("é‡Šä¹‰ï¼š %s\n\n",answer_word->wordMean);
 		}
-		printf("¹¦ÄÜ½áÊø ±¾´Î¸´Ï° %d ´Ê»ã\n\n",cnt_a);
+		printf("åŠŸèƒ½ç»“æŸ æœ¬æ¬¡å¤ä¹  %d è¯æ±‡\n\n",cnt_a);
 	}
 }
 
-/*Ñ¡ÔñÅÅĞò²¢Êä³öĞòÁĞ±íº¯Êı
-²ÎÊı £ºµ¥´Ê×ÜÊı£¬½á¹¹ÌåÊı×éÃû,·½Ê½Ñ¡Ôñ±äÁ¿ ·µ»ØÖµ:ÎŞ*/
+/*é€‰æ‹©æ’åºå¹¶è¾“å‡ºåºåˆ—è¡¨å‡½æ•°
+å‚æ•° ï¼šå•è¯æ€»æ•°ï¼Œç»“æ„ä½“æ•°ç»„å,æ–¹å¼é€‰æ‹©å˜é‡ è¿”å›å€¼:æ— */
 void choosingSort(int cnt_word,int choosingNumber3,struct information_node *sorting_word) {
-	int i,j;//Ñ­»·¿ØÖÆ±äÁ¿
-	int index_max;//±ê¼ÇĞòºÅ±äÁ¿
-	struct information_node temp;//½»»»½á¹¹Ìå±äÁ¿ 
+	int i,j;//å¾ªç¯æ§åˆ¶å˜é‡
+	int index_max;//æ ‡è®°åºå·å˜é‡
+	struct information_node temp;//äº¤æ¢ç»“æ„ä½“å˜é‡ 
 	 
 	for (i=0;i<cnt_word;i++){
 		index_max=i;
 		for(j=i;j<cnt_word;j++){
-			if(choosingNumber3==0){//ÒÔ»Ø´ğ´ÎÊıÅÅĞò 
+			if(choosingNumber3==0){//ä»¥å›ç­”æ¬¡æ•°æ’åº 
 				if(sorting_word[j].cnt_answer>sorting_word[index_max].cnt_answer){
 					index_max=j;
 				}
-			}else if(choosingNumber3==1){//ÒÔÕıÈ·´ÎÊıÅÅĞò 
+			}else if(choosingNumber3==1){//ä»¥æ­£ç¡®æ¬¡æ•°æ’åº 
 				if(sorting_word[j].cnt_correct>sorting_word[index_max].cnt_correct){
 					index_max=j;
 				}
-			}else if(choosingNumber3==2){//ÒÔ´íÎó´ÎÊıÅÅĞò 
+			}else if(choosingNumber3==2){//ä»¥é”™è¯¯æ¬¡æ•°æ’åº 
 				if(sorting_word[j].cnt_wrong>sorting_word[index_max].cnt_wrong){
 					index_max=j;
 				}
-			}else{//ÒÔÕıÈ·ÂÊÅÅĞò 
+			}else{//ä»¥æ­£ç¡®ç‡æ’åº 
 				if(1.0*sorting_word[j].cnt_correct/sorting_word[j].cnt_answer>1.0*sorting_word[index_max].cnt_correct/sorting_word[index_max].cnt_answer){
 					index_max=j;
 				}
 			}
 		}
-		//½á¹¹ÌåÄÚ²¿ĞÅÏ¢½»»» 
+		//ç»“æ„ä½“å†…éƒ¨ä¿¡æ¯äº¤æ¢ 
 		temp=sorting_word[i];
 		sorting_word[i]=sorting_word[index_max];
 		sorting_word[index_max]=temp;
 	}
-	//Êä³öÁĞ±íĞÅÏ¢ 
-	printf("         µ¥´Ê  	     ÕıÈ·´ÎÊı    »Ø´ğ´ÎÊı      ÕıÈ·ÂÊ\n"); 
+	//è¾“å‡ºåˆ—è¡¨ä¿¡æ¯ 
+	printf("         å•è¯  	     æ­£ç¡®æ¬¡æ•°    å›ç­”æ¬¡æ•°      æ­£ç¡®ç‡\n"); 
 	for(i=0;i<cnt_word;i++){
 		printf("%15s %10d %10d %14.1f%%\n",sorting_word[i].wordName,sorting_word[i].cnt_correct,sorting_word[i].cnt_answer,100.0*sorting_word[i].cnt_correct/sorting_word[i].cnt_answer) ;
 	}
 }
 
-/*¼¼ÊõÊı¾İ±íÊä³öº¯Êı
-²ÎÊı £ºµ¥´Ê×ÜÊı£¬Á´±íÍ·½áµãµØÖ·¡¡·µ»ØÖµ£ºÎŞ*/
+/*æŠ€æœ¯æ•°æ®è¡¨è¾“å‡ºå‡½æ•°
+å‚æ•° ï¼šå•è¯æ€»æ•°ï¼Œé“¾è¡¨å¤´ç»“ç‚¹åœ°å€ã€€è¿”å›å€¼ï¼šæ— */
 void dataCount(int cnt_word,struct information_node * head){
-	printf("0)ÒÔ»Ø´ğ´ÎÊıÅÅĞò\n");
-	printf("1)ÒÔÕıÈ·´ÎÊıÅÅĞò\n");
-	printf("2)ÒÔ´íÎó´ÎÊıÅÅĞò\n");
-	printf("3)ÒÔ»Ø´ğÕıÈ·ÂÊ½øĞĞÅÅĞò\n"); 
-	printf("ÇëÊäÈë¼¼ÊõÊı¾İĞòÁĞ±íÅÅĞòÒÀ¾İ£º");
+	printf("0)ä»¥å›ç­”æ¬¡æ•°æ’åº\n");
+	printf("1)ä»¥æ­£ç¡®æ¬¡æ•°æ’åº\n");
+	printf("2)ä»¥é”™è¯¯æ¬¡æ•°æ’åº\n");
+	printf("3)ä»¥å›ç­”æ­£ç¡®ç‡è¿›è¡Œæ’åº\n"); 
+	printf("è¯·è¾“å…¥æŠ€æœ¯æ•°æ®åºåˆ—è¡¨æ’åºä¾æ®ï¼š");
 	
-	struct information_node sorting_word[cnt_word];	//¹¹ÔìÊı×é´æ´¢ĞÅÏ¢ÓÃÒÔÅÅĞò 
-	struct information_node	*p=head;//´æ´¢Á´±í½áµã 
-	int i,j,choosingNumber3;//Ñ­»·¿ØÖÆ±äÁ¿,Ñ¡Ôñ±äÁ¿ 
-	//½«Á´±íĞÅÏ¢Â¼Èë½á¹¹ÌåÊı×éÖĞ 
+	struct information_node sorting_word[cnt_word];	//æ„é€ æ•°ç»„å­˜å‚¨ä¿¡æ¯ç”¨ä»¥æ’åº 
+	struct information_node	*p=head;//å­˜å‚¨é“¾è¡¨ç»“ç‚¹ 
+	int i,j,choosingNumber3;//å¾ªç¯æ§åˆ¶å˜é‡,é€‰æ‹©å˜é‡ 
+	//å°†é“¾è¡¨ä¿¡æ¯å½•å…¥ç»“æ„ä½“æ•°ç»„ä¸­ 
 	for(i=0;i<cnt_word;i++){
-		sorting_word[i]=*p;//´æ´¢½Úµã
-		p=p->next;//½ÚµãÒÆ¶¯ 
+		sorting_word[i]=*p;//å­˜å‚¨èŠ‚ç‚¹
+		p=p->next;//èŠ‚ç‚¹ç§»åŠ¨ 
 	}
-	scanf("%d",&choosingNumber3) ;//Â¼ÈëÑ¡Ôñ±äÁ¿ 
+	scanf("%d",&choosingNumber3) ;//å½•å…¥é€‰æ‹©å˜é‡ 
 	printf("\n"); 
 	choosingSort(cnt_word,choosingNumber3,sorting_word) ;
-	printf("\nÊä³öĞÅÏ¢±íÈçÉÏ\n\n"); 
+	printf("\nè¾“å‡ºä¿¡æ¯è¡¨å¦‚ä¸Š\n\n"); 
 }
 
-/*Á´±íÒÑ±ä¸üĞÅÏ¢Ğ´ÈëÎÄ¼şº¯Êı
-²ÎÊı£ºÁ´±íÍ·½ÚµãµØÖ· µ¥´Ê×ÜÊı ·µ»ØÖµ£ºÎŞ*/ 
+/*é“¾è¡¨å·²å˜æ›´ä¿¡æ¯å†™å…¥æ–‡ä»¶å‡½æ•°
+å‚æ•°ï¼šé“¾è¡¨å¤´èŠ‚ç‚¹åœ°å€ å•è¯æ€»æ•° è¿”å›å€¼ï¼šæ— */ 
 void word_output(int cnt_word,struct information_node *head ){
 	FILE *fp;
-	int i;//Ñ­»·¿ØÖÆ±äÁ¿ 
-	struct information_node *p=head;//½Úµã´¢´æÖ¸Õë 
+	int i;//å¾ªç¯æ§åˆ¶å˜é‡ 
+	struct information_node *p=head;//èŠ‚ç‚¹å‚¨å­˜æŒ‡é’ˆ 
 	
-	if((fp=fopen("µ¥´Ê¿â.txt","w"))==NULL){
-		printf("´ò¿ªÎÄ¼şÊ§°Ü£¡");
+	if((fp=fopen("å•è¯åº“.txt","w"))==NULL){
+		printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼");
 		exit(0);
 	} 
 	for(i=0;i<cnt_word;i++){
-		//½«½ÚµãĞÅÏ¢Ğ´ÈëÎÄ¼şÖĞ 
+		//å°†èŠ‚ç‚¹ä¿¡æ¯å†™å…¥æ–‡ä»¶ä¸­ 
 		fprintf(fp,"%s %s %d %d %d\n",p->wordName,p->wordMean,p->cnt_correct,p->cnt_wrong,p->cnt_answer);
-		p=p->next;//½ÚµãÏòºóÒÆ¶¯ 
+		p=p->next;//èŠ‚ç‚¹å‘åç§»åŠ¨ 
 	}
 	if(fclose(fp)){
-		printf("¹Ø±ÕÎÄ¼şÊ§°Ü£¡");
+		printf("å…³é—­æ–‡ä»¶å¤±è´¥ï¼");
 		exit(0);
 	}
 } 
